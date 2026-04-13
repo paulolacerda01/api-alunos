@@ -65,7 +65,7 @@ app.get('/alunos/:id', async (req, res) => {
 // POST - INSERIR
 // ----------------------
 app.post('/alunos', async (req, res) => {
-  const { nome, curso } = req.body;
+  const { id, nome, curso } = req.body;
 
   // Validação simples
   if (!nome || !curso) {
@@ -76,7 +76,7 @@ app.post('/alunos', async (req, res) => {
 
   try {
     const resultado = await pool.query(
-      'INSERT INTO alunos (nome, curso) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO alunos (id, nome, curso) VALUES ($1, $2, $3) RETURNING *',
       [nome, curso]
     );
 
