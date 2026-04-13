@@ -68,16 +68,16 @@ app.post('/alunos', async (req, res) => {
   const { id, nome, curso } = req.body;
 
   // Validação simples
-  if (!nome || !curso) {
+  if (!id || !nome || !curso) {
     return res.status(400).json({
-      erro: 'Nome e curso são obrigatórios'
+      erro: 'Id, Nome e curso são obrigatórios'
     });
   }
 
   try {
     const resultado = await pool.query(
       'INSERT INTO alunos (id, nome, curso) VALUES ($1, $2, $3) RETURNING *',
-      [nome, curso]
+      [id, nome, curso]
     );
 
     res.status(201).json({
